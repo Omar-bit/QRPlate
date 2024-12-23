@@ -1,0 +1,64 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <img
+      src="https://img.icons8.com/ios-filled/50/ffffff/qr-code.png"
+      alt="QRPlate Logo"
+      class="brand-logo"
+    />
+    <span class="platform-name">QRPlate</span>
+  </div>
+  <ul class="navbar-links">
+    <li>
+      <a routerLink="/manage-categories" routerLinkActive="active"
+        >Categories</a
+      >
+    </li>
+    <li>
+      <a routerLink="/manage-products" routerLinkActive="active">Products</a>
+    </li>
+    <li>
+      <a
+        routerLink="/menu/{{ buisnessName }}"
+        routerLinkActive="active"
+        target="_blank"
+        >Menu Preview</a
+      >
+    </li>
+    <li>
+      <button (click)="toggleQR()">Get QR</button>
+    </li>
+  </ul>
+  <button class="logout-btn" (click)="onLogout()">Logout</button>
+
+  <div class="hamburger-menu" (click)="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</nav>
+
+<ul class="mobile-navbar-links" [class.show]="isMenuOpen" *ngIf="isMenuOpen">
+  <li>
+    <a routerLink="/manage-categories" routerLinkActive="active">Categories</a>
+  </li>
+  <li>
+    <a routerLink="/manage-products" routerLinkActive="active">Products</a>
+  </li>
+  <li>
+    <a
+      routerLink="/menu/{{ buisnessName }}"
+      target="_blank"
+      routerLinkActive="active"
+      >Menu Preview</a
+    >
+  </li>
+  <li>
+    <button class="logout-btn mobile-logout-btn" (click)="onLogout()">
+      Logout
+    </button>
+  </li>
+</ul>
+
+<div (click)="closeQR($event)" *ngIf="isQRCodeVisible" class="qr">
+  <img [src]="qrCodeUrl" alt="QR Code" />
+</div>

@@ -1,0 +1,83 @@
+<div class="signup-container">
+  <div class="signup-header">
+    <img
+      src="https://img.icons8.com/fluency/96/restaurant.png"
+      alt="Signup Icon"
+    />
+    <h2>Welcome to QRPlate</h2>
+    <p>Create your account to manage menus with ease</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="user.name"
+        required
+        placeholder="John Doe"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="buisnessName">Business Name</label>
+      <input
+        type="text"
+        id="buisnessName"
+        name="buisnessName"
+        [(ngModel)]="user.buisnessName"
+        required
+        placeholder="Example Cafe"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="buisnessType">Business Type</label>
+      <select
+        id="buisnessType"
+        name="buisnessType"
+        [(ngModel)]="user.buisnessType"
+        required
+      >
+        <option value="" disabled selected>Select Business Type</option>
+        <option value="Cafe">Cafe</option>
+        <option value="Restaurant">Restaurant</option>
+        <option value="Bakery">Bakery</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="user.email"
+        required
+        placeholder="example@email.com"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="user.password"
+        required
+        placeholder="Enter a secure password"
+      />
+    </div>
+
+    <button type="submit" [disabled]="!signupForm.valid" class="btn-submit">
+      Sign Up
+    </button>
+  </form>
+
+  <div class="signup-footer">
+    <p>Already have an account? <a routerLink="/sign-in">Log in here</a></p>
+  </div>
+</div>

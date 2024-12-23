@@ -1,0 +1,130 @@
+.sign-in-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.sign-in-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sign-in-header img {
+  width: 96px;
+  margin-bottom: 1rem;
+}
+
+.sign-in-header h2 {
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.sign-in-header p {
+  color: #bb86fc;
+  font-size: 1.1rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  color: #e0e0e0;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input {
+  padding: 0.8rem;
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #444;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #03dac6;
+  outline: none;
+}
+
+button {
+  background-color: #6200ee;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #3700b3;
+  transform: translateY(-3px);
+}
+
+button:focus {
+  outline: none;
+}
+
+.error {
+  color: #ff3b30;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.sign-in-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #e0e0e0;
+}
+
+.sign-in-footer a {
+  color: #bb86fc;
+  text-decoration: none;
+}
+
+.sign-in-footer a:hover {
+  color: #03dac6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .sign-in-container {
+    padding: 1.5rem;
+    width: 90%;
+  }
+
+  .sign-in-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .sign-in-header p {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1rem;
+  }
+}

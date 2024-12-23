@@ -1,0 +1,55 @@
+<div class="menu-container">
+  <h1 class="menu-title">✨{{ businessName }}'s Menu✨</h1>
+
+  <div class="controls">
+    <div class="filter-by-category">
+      <label for="category-select">Filter by Category</label>
+      <select
+        id="category-select"
+        [(ngModel)]="selectedCategory"
+        (change)="onCategoryChange()"
+        class="category-dropdown"
+      >
+        <option value="">All Categories</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-by-category">
+      <label for="search-input"> Search for Products </label>
+
+      <input
+        id="search-input"
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+        placeholder="🔍 Search for products..."
+        class="search-input"
+      />
+    </div>
+  </div>
+
+  <div class="product-grid">
+    <div *ngFor="let product of filteredProducts" class="product-card">
+      <div class="product-image-container">
+        <img
+          [src]="
+            product.img ||
+            'https://commercial.bunn.com/img/image-not-available.png'
+          "
+          alt="{{ product.name }}"
+          class="product-image"
+        />
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-price">${{ product.price }}</p>
+        <p class="product-category">
+          Category: {{ product.category?.name || "Uncategorized" }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

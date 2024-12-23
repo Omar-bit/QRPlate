@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+
+<div class="manage-categories-container">
+  <h2 class="title">Manage Categories</h2>
+
+  <div class="add-category-btn">
+    <button (click)="showAddCategoryModal()" class="btn-primary">
+      Add New Category
+    </button>
+  </div>
+
+  <div class="category-cards" *ngIf="categories.length > 0; else noCategories">
+    <div class="category-card" *ngFor="let category of categories">
+      <div class="category-details">
+        <h3>{{ category.name }}</h3>
+      </div>
+      <div class="category-image">
+        <img
+          [src]="
+            category.img ||
+            'https://commercial.bunn.com/img/image-not-available.png'
+          "
+          alt="Category Image"
+        />
+      </div>
+      <div class="category-actions">
+        <button
+          class="btn-danger"
+          id="delete"
+          (click)="deleteCategory(category.id)"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noCategories>
+    <p>No categories available. Start by adding a new category!</p>
+  </ng-template>
+
+  <div class="modal-overlay" *ngIf="isAddCategoryModalVisible">
+    <div class="modal">
+      <h3>Add New Category</h3>
+      <form (submit)="addCategory()">
+        <label for="name">Category Name:</label>
+        <input
+          id="name"
+          [(ngModel)]="newCategory.name"
+          name="name"
+          required
+          placeholder="Enter category name"
+        />
+
+        <label for="img">Category Image (Upload):</label>
+        <input
+          id="img"
+          type="file"
+          (change)="onFileSelected($event)"
+          required
+        />
+
+        <div *ngIf="base64Image" class="image-preview">
+          <p>Image Preview:</p>
+          <img [src]="base64Image" alt="Preview" width="200" />
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary">Add Category</button>
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="closeAddCategoryModal()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

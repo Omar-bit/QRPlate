@@ -1,0 +1,144 @@
+<app-navbar></app-navbar>
+
+<div class="manage-products-container">
+  <h2 class="title">Manage Products</h2>
+
+  <div class="add-product-btn">
+    <button (click)="showAddProductModal()" class="btn-primary">
+      Add New Product
+    </button>
+  </div>
+
+  <div class="product-cards" *ngIf="products.length > 0; else noProducts">
+    <div class="product-card" *ngFor="let product of products">
+      <img
+        [src]="
+          product.img ||
+          'https://commercial.bunn.com/img/image-not-available.png'
+        "
+        alt="{{ product.name }}"
+        class="product-image"
+      />
+      <div class="product-details">
+        <h3>{{ product.name }}</h3>
+        <p>
+          Price: <strong>{{ product.price }} TND</strong>
+        </p>
+        <p>Category: {{ product.category?.name || "Uncategorized" }}</p>
+      </div>
+      <div class="product-actions">
+        <button class="btn-primary" (click)="showEditProductModal(product)">
+          Edit
+        </button>
+        <button class="btn-danger" (click)="deleteProduct(product.id)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noProducts>
+    <p>No products available. Start by adding a new product!</p>
+  </ng-template>
+
+  <div class="modal-overlay" *ngIf="isAddProductModalVisible">
+    <div class="modal">
+      <h3>Add New Product</h3>
+      <form (submit)="addProduct()">
+        <label for="name">Product Name:</label>
+        <input id="name" [(ngModel)]="newProduct.name" name="name" required />
+
+        <label for="price">Price:</label>
+        <input
+          id="price"
+          [(ngModel)]="newProduct.price"
+          name="price"
+          required
+        />
+
+        <label for="category">Category:</label>
+        <select
+          id="category"
+          [(ngModel)]="newProduct.categoryId"
+          name="category"
+        >
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+
+        <label for="img">Product Image</label>
+        <input
+          (change)="onFileSelected($event)"
+          id="img"
+          name="img"
+          type="file"
+        />
+
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary">Add Product</button>
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="closeAddProductModal()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" *ngIf="isEditProductModalVisible">
+    <div class="modal">
+      <h3>Edit Product</h3>
+      <form (submit)="updateProduct()">
+        <label for="edit-name">Product Name:</label>
+        <input
+          id="edit-name"
+          [(ngModel)]="editedProduct.name"
+          name="name"
+          required
+        />
+
+        <label for="edit-price">Price:</label>
+        <input
+          id="edit-price"
+          [(ngModel)]="editedProduct.price"
+          name="price"
+          required
+        />
+
+        <label for="edit-category">Category:</label>
+        <select
+          id="edit-category"
+          [(ngModel)]="editedProduct.categoryId"
+          name="category"
+        >
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+
+        <label for="edit-img">Product Image</label>
+        <input
+          (change)="onEditFileSelected($event)"
+          id="edit-img"
+          name="img"
+          type="file"
+        />
+
+        <div class="modal-actions">
+          <button type="submit" class="btn-primary">Save Changes</button>
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="closeEditProductModal()"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
